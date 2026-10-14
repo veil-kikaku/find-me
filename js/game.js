@@ -139,7 +139,19 @@ $('info').textContent =
     '難易度：' +
     '★'.repeat(q.difficulty) +
     '☆'.repeat(5 - q.difficulty);
- $('message').textContent='隠れたものをクリック・タップしてね';
+const category = categories.find(c => c.id === q.category);
+const characterName = category?.name || 'キャラ';
+
+const description = document.querySelector('#play p.small');
+
+if (description) {
+    description.textContent =
+        `写真の中の隠れた${characterName}をタップしてね。` +
+        'ドラッグで移動、ホイール・ピンチで拡大できます。タップで回答！';
+}
+
+$('message').textContent =
+    `隠れた${characterName}をクリック・タップしてね`;
  $('answerMark').hidden=true;
 photoimg.src=q.image;
 resetZoom();
