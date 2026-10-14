@@ -1,20 +1,23 @@
 [
   {
-    "id": "buyoyo",
+    "id": "muiru",
     "name": "ぶよよ",
     "icon": "💗",
-    "image": "images/categories/buyoyo.png"
+    "image": "images/categories/muiru.png",
+    "idPrefix": "b"
   },
   {
-    "id": "naputa",
-    "name": "なぷた",
-    "icon": "💤",
-    "image": "images/categories/naputa.png"
-  },
-  {
-    "id": "pokke",
+    "id": "chuno",
     "name": "ぽっけ",
     "icon": "🐾",
-    "image": "images/categories/pokke.png"
+    "image": "images/categories/chuno.png",
+    "idPrefix": "p"
+  },
+  {
+    "id": "hirune",
+    "name": "なぷた",
+    "icon": "🌙",
+    "image": "images/categories/hirune.png",
+    "idPrefix": "n"
   }
 ]
