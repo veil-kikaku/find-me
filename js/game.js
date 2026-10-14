@@ -135,7 +135,10 @@ $('play').hidden=false;
 $('homeButton').hidden=true;
 $('back').hidden=false;
  $('title').textContent=q.title;
-$('info').textContent='難易度：'+'★'.repeat(q.difficulty);
+$('info').textContent =
+    '難易度：' +
+    '★'.repeat(q.difficulty) +
+    '☆'.repeat(5 - q.difficulty);
  $('message').textContent='隠れたものをクリック・タップしてね';
  $('answerMark').hidden=true;
 photoimg.src=q.image;
