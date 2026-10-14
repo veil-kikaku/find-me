@@ -1,4 +1,4 @@
-let questions=[],active=null,solved=new Set(JSON.parse(localStorage.getItem('find-me-solved')||'[]'));
+let questions=[],categories=[],currentCategory=null,active=null,solved=new Set(JSON.parse(localStorage.getItem('find-me-solved')||'[]'));
 const $=id=>document.getElementById(id);
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function distance(q,x,y){const img=$('photoimg');
@@ -11,21 +11,78 @@ m.style.top=q.answer.y+'%';
 m.style.width=d+'%';
 m.style.height=(q.answer.radius*2*Math.min(img.naturalWidth,img.naturalHeight)/img.naturalHeight)+'%';
 m.hidden=false}
-function render(){ $('list').replaceChildren();
-questions.forEach(q=>{const card=document.createElement('article');
-card.className='card';
-const img=document.createElement('img');
-img.src=q.image;
-img.alt='問題写真';
-const h=document.createElement('h3');
-h.textContent=q.title;
-const p=document.createElement('p');
-p.textContent='★'.repeat(q.difficulty)+'☆'.repeat(5-q.difficulty)+(solved.has(q.id)?'　✓ クリア':'');
-const b=document.createElement('button');
-b.textContent='挑戦する';
-b.onclick=()=>openQuestion(q);
-card.append(img,h,p,b);
-$('list').append(card)})}
+function showHome() {
+  active = null;
+  currentCategory = null;
+  $('home').hidden = false;
+  $('questionList').hidden = true;
+  $('play').hidden = true;
+  $('homeButton').hidden = true;
+  $('back').hidden = true;
+  resetZoom();
+  window.scrollTo(0, 0);
+}
+
+function showCategory(id) {
+  currentCategory = id;
+  active = null;
+  $('home').hidden = true;
+  $('questionList').hidden = false;
+  $('play').hidden = true;
+  $('homeButton').hidden = false;
+  $('back').hidden = true;
+  $('categoryTitle').textContent = categories.find(c => c.id === id)?.name || '問題一覧';
+  render();
+  window.scrollTo(0, 0);
+}
+
+function renderCategories() {
+  const root = $('categories');
+  root.replaceChildren();
+  categories.forEach(category => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'category-card';
+    const symbol = document.createElement('span');
+    symbol.className = 'category-symbol';
+    symbol.textContent = category.icon || '🔎';
+    const name = document.createElement('strong');
+    name.textContent = category.name;
+    const count = document.createElement('span');
+    count.className = 'category-count';
+    count.textContent = questions.filter(q => (q.category || 'uncategorized') === category.id).length + ' 問';
+    card.append(symbol, name, count);
+    card.onclick = () => showCategory(category.id);
+    root.append(card);
+  });
+}
+
+function render() {
+  $('list').replaceChildren();
+  const filtered = questions.filter(q => (q.category || 'uncategorized') === currentCategory);
+  if (!filtered.length) {
+    $('list').textContent = 'このキャラクターの問題はまだありません。';
+    return;
+  }
+  filtered.forEach(q => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    const img = document.createElement('img');
+    img.src = q.image;
+    img.alt = '問題写真';
+    const h = document.createElement('h3');
+    h.textContent = q.title;
+    const p = document.createElement('p');
+    p.textContent = '★'.repeat(q.difficulty) + '☆'.repeat(5 - q.difficulty) +
+      (solved.has(q.id) ? '　✓ クリア' : '');
+    const b = document.createElement('button');
+    b.textContent = '挑戦する';
+    b.onclick = () => openQuestion(q);
+    card.append(img, h, p, b);
+    $('list').append(card);
+  });
+}
+
 // Zoom state is defined in image-relative coordinates, independent of CSS scaling.
 const zoom={scale:1,x:0,y:0,pointers:new Map(),gesture:null,suppressClick:false};
 const photo=$('photo'),layer=$('photoLayer'),photoimg=$('photoimg');
@@ -59,8 +116,11 @@ zoom.gesture=null;
 drawZoom()}
 function openQuestion(q){
  active=q;
-$('list').hidden=true;
+$('questionList').hidden=true;
+$('home').hidden=true;
 $('play').hidden=false;
+$('homeButton').hidden=true;
+$('back').hidden=false;
  $('title').textContent=q.title;
 $('info').textContent='難易度：'+'★'.repeat(q.difficulty);
  $('message').textContent='隠れたものをクリック・タップしてね';
@@ -71,12 +131,12 @@ resetZoom();
 drawZoom()};
  window.scrollTo(0,0);
 }
-$('back').onclick=()=>{$('play').hidden=true;
-$('list').hidden=false;
-active=null;
-resetZoom();
-render();
-window.scrollTo(0,0)};
+$('homeButton').onclick = showHome;
+$('back').onclick = () => {
+  if (currentCategory) showCategory(currentCategory);
+  else showHome();
+};
+
 function answerAt(clientX,clientY){
  if(!active||!$('answerMark').hidden)return;
  const r=photo.getBoundingClientRect();
@@ -159,7 +219,24 @@ const x=active.answer.x,y=active.answer.y;
 $('message').textContent=`ヒント：写真の${y<33?'上':y>67?'下':'中央'}・${x<33?'左':x>67?'右':'中央'}あたり！`};
 $('reveal').onclick=()=>{if(active){mark(active);
 $('message').textContent='ここにいたよ！'}};
-fetch('data/questions.json').then(r=>{if(!r.ok)throw Error('読み込み失敗');
-return r.json()}).then(data=>{questions=data;
-render();
-if(!data.length)$('list').textContent='まだ問題がありません。管理画面で最初の問題を作ってください。'}).catch(()=>$('list').textContent='問題データを読み込めませんでした。GitHub Pagesで開いてください。');
+Promise.all([
+  fetch('data/categories.json').then(r => {
+    if (!r.ok) throw Error('カテゴリデータの読み込み失敗');
+    return r.json();
+  }),
+  fetch('data/questions.json').then(r => {
+    if (!r.ok) throw Error('問題データの読み込み失敗');
+    return r.json();
+  })
+]).then(([categoryData, questionData]) => {
+  categories = categoryData;
+  questions = questionData;
+  if (questions.some(q => !q.category) && !categories.some(c => c.id === 'uncategorized')) {
+    categories.push({ id: 'uncategorized', name: '未分類（既存の問題）', icon: '📷' });
+  }
+  renderCategories();
+  showHome();
+}).catch(error => {
+  $('categories').textContent = 'データを読み込めませんでした。GitHub Pagesで開いてください。';
+  console.error(error);
+});

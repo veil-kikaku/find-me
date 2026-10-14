@@ -19,13 +19,18 @@
    </p>
   </header>
   <main>
-   <nav>
-    <button id="back" type="button">
-     問題一覧
-    </button>
+   <nav class="page-nav">
+    <button id="homeButton" type="button" hidden>← キャラクター選択</button>
+    <button id="back" type="button" hidden>← 問題一覧</button>
    </nav>
-   <div class="cards" id="list">
-   </div>
+   <section id="home">
+    <h2>キャラクターを選んでね！</h2>
+    <div class="category-grid" id="categories"></div>
+   </section>
+   <section id="questionList" hidden>
+    <h2 id="categoryTitle"></h2>
+    <div class="cards" id="list"></div>
+   </section>
    <section hidden="" id="play">
     <h2 id="title">
     </h2>

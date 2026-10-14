@@ -1,3 +1,20 @@
+// キャラクターは data/categories.json から自動取得します。
+fetch('data/categories.json')
+  .then(r => { if (!r.ok) throw Error('カテゴリ読み込み失敗'); return r.json(); })
+  .then(categories => {
+    const select = document.getElementById('category');
+    select.replaceChildren();
+    categories.forEach(c => {
+      const option = document.createElement('option');
+      option.value = c.id;
+      option.textContent = c.name;
+      select.append(option);
+    });
+  })
+  .catch(() => {
+    document.getElementById('category').innerHTML = '<option value="">カテゴリを読み込めません</option>';
+  });
+
 const $=id=>document.getElementById(id);
 let selected=null,point=null,existingQuestions=[];
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -85,7 +102,7 @@ if(!title||!point||!selected)return alert('タイトル・写真・正解位置�
 if(!(radius>=1&&radius<=30))return alert('正解範囲は1〜30で設定してください');
 const ext=selected.type==='image/png'?'png':selected.type==='image/webp'?'webp':selected.type==='image/gif'?'gif':selected.type==='image/jpeg'?'jpg':null;
 if(!ext)return alert('JPEG・PNG・WebP・GIFの画像を選んでください');
-const image=`images/${id}.${ext}`,q={id,title,difficulty:Number($('difficulty').value),image,answer:{x:+point.x.toFixed(3),y:+point.y.toFixed(3),radius}};
+const category=$('category').value;if(!category)return alert('キャラクターを選んでください');const image=`images/${id}.${ext}`,q={id,title,category,difficulty:Number($('difficulty').value),image,answer:{x:+point.x.toFixed(3),y:+point.y.toFixed(3),radius}};
 const bytes=new Uint8Array(await selected.arrayBuffer()),blob=zip([['data/questions.json',encoder.encode(JSON.stringify([...existingQuestions,q],null,2))],[image,bytes]]);
 const url=URL.createObjectURL(blob),a=document.createElement('a');
 a.href=url;
