@@ -1,17 +1,20 @@
 [
   {
-    "id": "muiru",
-    "name": "心恋音むいる",
-    "icon": "💗"
+    "id": "buyoyo",
+    "name": "ぶよよ",
+    "icon": "💗",
+    "image": "images/categories/buyoyo.png"
   },
   {
-    "id": "chuno",
-    "name": "鈴日奈ちゅの",
-    "icon": "🐾"
+    "id": "naputa",
+    "name": "なぷた",
+    "icon": "💤",
+    "image": "images/categories/naputa.png"
   },
   {
-    "id": "hirune",
-    "name": "瑠乃亜ひるね",
-    "icon": "🌙"
+    "id": "pokke",
+    "name": "ぽっけ",
+    "icon": "🐾",
+    "image": "images/categories/pokke.png"
   }
 ]

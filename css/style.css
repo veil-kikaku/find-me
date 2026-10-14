@@ -333,3 +333,28 @@ button:focus-visible,a:focus-visible,input:focus-visible {
     .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .category-card { min-height: 150px; }
 }
+
+/* カテゴリ画像：正方形の枠に収め、縦横比を維持 */
+.category-symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 112px;
+    height: 112px;
+    font-size: 42px;
+}
+
+.category-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+@media (max-width: 600px) {
+    .category-symbol {
+        width: 90px;
+        height: 90px;
+    }
+}

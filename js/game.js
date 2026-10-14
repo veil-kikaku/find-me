@@ -45,7 +45,20 @@ function renderCategories() {
     card.className = 'category-card';
     const symbol = document.createElement('span');
     symbol.className = 'category-symbol';
-    symbol.textContent = category.icon || '🔎';
+    if (category.image) {
+      const iconImage = document.createElement('img');
+      iconImage.className = 'category-image';
+      iconImage.src = category.image;
+      iconImage.alt = '';
+      iconImage.loading = 'lazy';
+      iconImage.onerror = () => {
+        symbol.replaceChildren();
+        symbol.textContent = category.icon || '🔎';
+      };
+      symbol.append(iconImage);
+    } else {
+      symbol.textContent = category.icon || '🔎';
+    }
     const name = document.createElement('strong');
     name.textContent = category.name;
     const count = document.createElement('span');
