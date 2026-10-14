@@ -26,14 +26,14 @@ function setZoom(next,clientX,clientY){
 }
 function resetZoom(){zoom.scale=1;zoom.x=0;zoom.y=0;zoom.pointers.clear();zoom.gesture=null;drawZoom()}
 function openQuestion(q){
- active=q;$('list').hidden=true;$('listTitle').hidden=true;$('play').hidden=false;
+ active=q;$('list').hidden=true;$('play').hidden=false;
  $('title').textContent=q.title;$('info').textContent='難易度：'+'★'.repeat(q.difficulty);
  $('message').textContent='隠れたものをクリック・タップしてね';
  $('answerMark').hidden=true;photoimg.src=q.image;resetZoom();
  photoimg.onload=()=>{photo.style.aspectRatio=`${photoimg.naturalWidth}/${photoimg.naturalHeight}`;drawZoom()};
  window.scrollTo(0,0);
 }
-$('back').onclick=()=>{$('play').hidden=true;$('list').hidden=false;$('listTitle').hidden=false;resetZoom();render()};
+$('back').onclick=()=>{$('play').hidden=true;$('list').hidden=false;active=null;resetZoom();render();window.scrollTo(0,0)};
 function answerAt(clientX,clientY){
  if(!active||!$('answerMark').hidden)return;
  const r=photo.getBoundingClientRect();
