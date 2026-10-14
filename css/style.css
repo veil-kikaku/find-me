@@ -12,3 +12,12 @@ footer{text-align:center;padding:24px;color:#777;font-size:.85rem}h2{font-size:1
 .zoom-controls{display:flex;align-items:center;gap:8px;margin:10px 0;flex-wrap:wrap}
 .zoom-controls button{min-width:46px}
 #zoomLevel{min-width:55px;text-align:center;font-weight:700}
+
+/* Prevent native browser image dragging and selection */
+#photo, #photoLayer, #photoimg, #answerMark {
+  -webkit-user-select:none; user-select:none;
+  -webkit-user-drag:none;
+}
+#photo, #photoLayer { touch-action:none; }
+#photoLayer, #photoimg { pointer-events:none; }
+#photo { -webkit-touch-callout:none; }

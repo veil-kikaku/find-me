@@ -6,6 +6,9 @@ function render(){ $('list').replaceChildren();questions.forEach(q=>{const card=
 // Zoom state is defined in image-relative coordinates, independent of CSS scaling.
 const zoom={scale:1,x:0,y:0,pointers:new Map(),gesture:null,suppressClick:false};
 const photo=$('photo'),layer=$('photoLayer'),photoimg=$('photoimg');
+photoimg.draggable=false;
+photo.addEventListener('dragstart',e=>e.preventDefault());
+photo.addEventListener('selectstart',e=>e.preventDefault());
 function constrain(){
  const w=photo.clientWidth,h=photo.clientHeight,s=zoom.scale;
  zoom.x=clamp(zoom.x,w*(1-s),0);zoom.y=clamp(zoom.y,h*(1-s),0);
@@ -44,6 +47,7 @@ function answerAt(clientX,clientY){
 }
 photo.addEventListener('pointerdown',e=>{
  if(e.pointerType==='mouse'&&e.button!==0)return;
+ e.preventDefault();
  photo.setPointerCapture(e.pointerId);
  zoom.pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
  if(zoom.pointers.size===1){
@@ -56,6 +60,7 @@ photo.addEventListener('pointerdown',e=>{
 });
 photo.addEventListener('pointermove',e=>{
  if(!zoom.pointers.has(e.pointerId))return;
+ e.preventDefault();
  zoom.pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
  const g=zoom.gesture;if(!g)return;
  if(zoom.pointers.size===2){
