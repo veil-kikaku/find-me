@@ -21,3 +21,42 @@ footer{text-align:center;padding:24px;color:#777;font-size:.85rem}h2{font-size:1
 #photo, #photoLayer { touch-action:none; }
 #photoLayer, #photoimg { pointer-events:none; }
 #photo { -webkit-touch-callout:none; }
+
+/* 非表示指定を確実に反映 */
+[hidden] {
+    display: none !important;
+}
+
+/* 問題一覧を小さなカードに */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.card {
+    padding: 10px;
+}
+
+.card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.card h3 {
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+.card button {
+    padding: 7px 12px;
+    font-size: 13px;
+}
+
+/* スマホ */
+@media (max-width: 600px) {
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
