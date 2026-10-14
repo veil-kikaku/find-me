@@ -1,2 +1,75 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffe5a6"><title>ベルプロかくれんぼ</title><link rel="stylesheet" href="css/style.css"></head><body><header><h1>ベルプロかくれんぼ</h1><p>写真のどこかに隠れているキャラを探そう！</p></header><main><nav><button id="back" type="button">問題一覧</button></nav><div id="list" class="cards"></div><section id="play" hidden><h2 id="title"></h2><p id="info"></p><p class="small">写真の中の隠れたものをタップしてね。ドラッグで移動、ホイール・ピンチで拡大できます。タップで回答！</p><div class="zoom-controls"><button id="zoomOut" type="button">－</button><span id="zoomLevel">100%</span><button id="zoomIn" type="button">＋</button><button id="zoomReset" type="button">リセット</button></div>
-<div class="photo" id="photo"><div id="photoLayer"><img draggable="false" id="photoimg" alt="問題写真"><div id="answerMark" hidden></div></div></div><p id="message" aria-live="polite">写真をクリック・タップしてね</p><button id="hint">ヒント</button><button id="reveal">答えを見る</button></section></main><footer>ベルプロかくれんぼ</footer><script src="js/game.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="ja">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="#ffe5a6" name="theme-color"/>
+  <title>
+   ベルプロかくれんぼ
+  </title>
+  <link href="css/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <header>
+   <h1>
+    ベルプロかくれんぼ
+   </h1>
+   <p>
+    写真のどこかに隠れているキャラを探そう！
+   </p>
+  </header>
+  <main>
+   <nav>
+    <button id="back" type="button">
+     問題一覧
+    </button>
+   </nav>
+   <div class="cards" id="list">
+   </div>
+   <section hidden="" id="play">
+    <h2 id="title">
+    </h2>
+    <p id="info">
+    </p>
+    <p class="small">
+     写真の中の隠れたものをタップしてね。ドラッグで移動、ホイール・ピンチで拡大できます。タップで回答！
+    </p>
+    <div class="zoom-controls">
+     <button id="zoomIn" type="button">
+      ＋
+     </button>
+     <span id="zoomLevel">
+      100%
+     </span>
+     <button id="zoomOut" type="button">
+      －
+     </button>
+     <button id="zoomReset" type="button">
+      リセット
+     </button>
+    </div>
+    <div class="photo" id="photo">
+     <div id="photoLayer">
+      <img alt="問題写真" draggable="false" id="photoimg"/>
+      <div hidden="" id="answerMark">
+      </div>
+     </div>
+    </div>
+    <p aria-live="polite" id="message">
+     写真をクリック・タップしてね
+    </p>
+    <button id="hint">
+     ヒント
+    </button>
+    <button id="reveal">
+     答えを見る
+    </button>
+   </section>
+  </main>
+  <footer>
+   ベルプロかくれんぼ
+  </footer>
+  <script src="js/game.js">
+  </script>
+ </body>
+</html>
