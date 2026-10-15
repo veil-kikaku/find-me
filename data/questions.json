@@ -1,21 +1,9 @@
 [
   {
-    "id": "b001",
+    "id": "b002",
     "title": "川沿いにて",
     "category": "buyoyo",
     "difficulty": 4,
-    "image": "images/b001.jpg",
-    "answer": {
-      "x": 64.381,
-      "y": 44.444,
-      "radius": 2
-    }
-  },
-  {
-    "id": "b002",
-    "title": "川辺にて",
-    "category": "buyoyo",
-    "difficulty": 3,
     "image": "images/b002.jpg",
     "answer": {
       "x": 64.842,
