@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "b001",
+    "title": "川沿いにて",
+    "category": "buyoyo",
+    "difficulty": 4,
+    "image": "images/b001.jpg",
+    "answer": {
+      "x": 64.381,
+      "y": 44.444,
+      "radius": 2
+    }
+  }
+]
