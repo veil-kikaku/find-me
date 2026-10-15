@@ -7,17 +7,17 @@
     "idPrefix": "b"
   },
   {
-    "id": "pokke",
-    "name": "ぽっけ",
-    "icon": "🐾",
-    "image": "images/categories/pokke.png",
-    "idPrefix": "p"
-  },
-  {
     "id": "naputa",
     "name": "なぷた",
     "icon": "💤",
     "image": "images/categories/naputa.png",
     "idPrefix": "n"
+  },
+  {
+    "id": "pokke",
+    "name": "ぽっけ",
+    "icon": "🐾",
+    "image": "images/categories/pokke.png",
+    "idPrefix": "p"
   }
 ]
