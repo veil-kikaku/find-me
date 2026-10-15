@@ -13,25 +13,37 @@
   },
   {
     "id": "b002",
-    "title": "川沿いにて",
+    "title": "公園でかくれんぼ1",
     "category": "buyoyo",
-    "difficulty": 4,
+    "difficulty": 2,
     "image": "images/b002.jpg",
     "answer": {
-      "x": 64.842,
-      "y": 47.456,
+      "x": 28.499,
+      "y": 31.203,
       "radius": 2
     }
   },
   {
     "id": "b003",
-    "title": "公園でかくれんぼ",
+    "title": "公園でかくれんぼ2",
     "category": "buyoyo",
     "difficulty": 3,
     "image": "images/b003.jpg",
     "answer": {
       "x": 89.447,
       "y": 40.834,
+      "radius": 2
+    }
+  },
+  {
+    "id": "b004",
+    "title": "川沿いでかくれんぼ",
+    "category": "buyoyo",
+    "difficulty": 4,
+    "image": "images/b004.jpg",
+    "answer": {
+      "x": 64.842,
+      "y": 47.456,
       "radius": 2
     }
   }
