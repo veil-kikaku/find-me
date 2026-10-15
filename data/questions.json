@@ -10,5 +10,17 @@
       "y": 44.444,
       "radius": 2
     }
+  },
+  {
+    "id": "b002",
+    "title": "川辺にて",
+    "category": "buyoyo",
+    "difficulty": 3,
+    "image": "images/b002.jpg",
+    "answer": {
+      "x": 64.842,
+      "y": 47.456,
+      "radius": 2
+    }
   }
 ]
