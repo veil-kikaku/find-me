@@ -1,5 +1,17 @@
 [
   {
+    "id": "b001",
+    "title": "練習問題",
+    "category": "buyoyo",
+    "difficulty": 1,
+    "image": "images/b001.jpg",
+    "answer": {
+      "x": 84.029,
+      "y": 41.587,
+      "radius": 5
+    }
+  },
+  {
     "id": "b002",
     "title": "川沿いにて",
     "category": "buyoyo",
