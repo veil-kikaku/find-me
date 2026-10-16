@@ -199,10 +199,26 @@ const characterName = category?.name || 'キャラ';
 
 const description = document.querySelector('#play p.small');
 
+const description = document.querySelector('#play p.small');
+
 if (description) {
-    description.textContent =
+    description.replaceChildren();
+    description.classList.add('play-description');
+
+    if (category?.image) {
+        const img = document.createElement('img');
+        img.src = category.image;
+        img.alt = '';
+        img.className = 'play-character-image';
+        description.append(img);
+    }
+
+    const text = document.createElement('span');
+    text.textContent =
         `写真の中の隠れた${characterName}をクリック・タップしよう！` +
         'ドラッグで移動！ホイール・ピンチで拡大縮小！';
+
+    description.append(text);
 }
 
 $('message').textContent = ``;
