@@ -427,3 +427,10 @@ button:focus-visible,a:focus-visible,input:focus-visible {
     max-height: 70vh;
     object-fit: contain;
 }
+
+/* PCのみ正解画像を大きくする */
+@media (min-width: 768px) {
+    #correctImage {
+        width: 300px;
+    }
+}
