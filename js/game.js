@@ -199,8 +199,6 @@ const characterName = category?.name || 'キャラ';
 
 const description = document.querySelector('#play p.small');
 
-const description = document.querySelector('#play p.small');
-
 if (description) {
     description.replaceChildren();
     description.classList.add('play-description');
