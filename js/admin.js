@@ -212,7 +212,7 @@ $('download').addEventListener('click', async () => {
   const ext = extensions[selected.type];
   if (!ext) return alert('JPEG・PNG・WebP・GIFの画像を選んでください');
 
-  const image = `images/${id}.${ext}`;
+  const image = `images/questions/${id}.${ext}`;
   const question = {
     id,
     title,

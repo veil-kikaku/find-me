@@ -4,7 +4,7 @@
     "title": "練習問題",
     "category": "buyoyo",
     "difficulty": 1,
-    "image": "images/b001.jpg",
+    "image": "images/questions/b001.jpg",
     "answer": {
       "x": 84.029,
       "y": 41.587,
@@ -16,7 +16,7 @@
     "title": "公園でかくれんぼ1",
     "category": "buyoyo",
     "difficulty": 1,
-    "image": "images/b002.jpg",
+    "image": "images/questions/b002.jpg",
     "answer": {
       "x": 28.499,
       "y": 31.203,
@@ -28,7 +28,7 @@
     "title": "公園でかくれんぼ2",
     "category": "buyoyo",
     "difficulty": 2,
-    "image": "images/b003.jpg",
+    "image": "images/questions/b003.jpg",
     "answer": {
       "x": 89.447,
       "y": 40.834,
@@ -40,7 +40,7 @@
     "title": "機関車でかくれんぼ",
     "category": "buyoyo",
     "difficulty": 3,
-    "image": "images/b004.jpg",
+    "image": "images/questions/b004.jpg",
     "answer": {
       "x": 53.947,
       "y": 65.509,
@@ -52,7 +52,7 @@
     "title": "川辺でかくれんぼ",
     "category": "buyoyo",
     "difficulty": 3,
-    "image": "images/b005.jpg",
+    "image": "images/questions/b005.jpg",
     "answer": {
       "x": 64.842,
       "y": 47.456,
@@ -64,7 +64,7 @@
     "title": "練習問題",
     "category": "naputa",
     "difficulty": 1,
-    "image": "images/n001.jpg",
+    "image": "images/questions/n001.jpg",
     "answer": {
       "x": 17.099,
       "y": 51.369,
@@ -76,7 +76,7 @@
     "title": "公園でかくれんぼ1",
     "category": "naputa",
     "difficulty": 1,
-    "image": "images/n002.jpg",
+    "image": "images/questions/n002.jpg",
     "answer": {
       "x": 38.657,
       "y": 90.195,
@@ -88,7 +88,7 @@
     "title": "公園でかくれんぼ2",
     "category": "naputa",
     "difficulty": 2,
-    "image": "images/n003.jpg",
+    "image": "images/questions/n003.jpg",
     "answer": {
       "x": 57.118,
       "y": 45.891,
@@ -100,7 +100,7 @@
     "title": "緑地でかくれんぼ",
     "category": "naputa",
     "difficulty": 3,
-    "image": "images/n004.jpg",
+    "image": "images/questions/n004.jpg",
     "answer": {
       "x": 87.967,
       "y": 20.172,
@@ -112,7 +112,7 @@
     "title": "練習問題",
     "category": "pokke",
     "difficulty": 1,
-    "image": "images/p001.jpg",
+    "image": "images/questions/p001.jpg",
     "answer": {
       "x": 31.165,
       "y": 78.592,
@@ -124,7 +124,7 @@
     "title": "公園でかくれんぼ1",
     "category": "pokke",
     "difficulty": 1,
-    "image": "images/p002.jpg",
+    "image": "images/questions/p002.jpg",
     "answer": {
       "x": 75.401,
       "y": 38.893,
@@ -136,7 +136,7 @@
     "title": "公園でかくれんぼ2",
     "category": "pokke",
     "difficulty": 2,
-    "image": "images/p003.jpg",
+    "image": "images/questions/p003.jpg",
     "answer": {
       "x": 62.638,
       "y": 31.358,
@@ -148,7 +148,7 @@
     "title": "公園でかくれんぼ3",
     "category": "pokke",
     "difficulty": 1,
-    "image": "images/p004.jpg",
+    "image": "images/questions/p004.jpg",
     "answer": {
       "x": 29.768,
       "y": 49.35,
@@ -160,7 +160,7 @@
     "title": "お城でかくれんぼ",
     "category": "pokke",
     "difficulty": 2,
-    "image": "images/p005.jpg",
+    "image": "images/questions/p005.jpg",
     "answer": {
       "x": 23.271,
       "y": 31.59,
@@ -172,7 +172,7 @@
     "title": "岩場でかくれんぼ",
     "category": "pokke",
     "difficulty": 2,
-    "image": "images/p006.jpg",
+    "image": "images/questions/p006.jpg",
     "answer": {
       "x": 19.073,
       "y": 31.842,
@@ -184,7 +184,7 @@
     "title": "公園でかくれんぼ",
     "category": "pokke",
     "difficulty": 3,
-    "image": "images/p007.jpg",
+    "image": "images/questions/p007.jpg",
     "answer": {
       "x": 34.581,
       "y": 56.084,

@@ -358,3 +358,16 @@ button:focus-visible,a:focus-visible,input:focus-visible {
         height: 90px;
     }
 }
+
+.site-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.site-title img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
