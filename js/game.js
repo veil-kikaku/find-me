@@ -134,7 +134,7 @@ $('home').hidden=true;
 $('play').hidden=false;
 $('homeButton').hidden=true;
 $('back').hidden=false;
- $('title').textContent=q.title;
+$('title').textContent=q.title;
 $('info').textContent =
     '難易度：' +
     '★'.repeat(q.difficulty) +
@@ -146,8 +146,8 @@ const description = document.querySelector('#play p.small');
 
 if (description) {
     description.textContent =
-        `写真の中の隠れた${characterName}をタップしてね。` +
-        'ドラッグで移動、ホイール・ピンチで拡大できます。タップで回答！';
+        `写真の中の隠れた${characterName}をクリック・タップしよう` +
+        'ドラッグで移動、ホイール・ピンチで拡大縮小！';
 }
 
 $('message').textContent =
