@@ -15,7 +15,7 @@
     "id": "b002",
     "title": "公園でかくれんぼ1",
     "category": "buyoyo",
-    "difficulty": 2,
+    "difficulty": 1,
     "image": "images/b002.jpg",
     "answer": {
       "x": 28.499,
@@ -27,7 +27,7 @@
     "id": "b003",
     "title": "公園でかくれんぼ2",
     "category": "buyoyo",
-    "difficulty": 3,
+    "difficulty": 2,
     "image": "images/b003.jpg",
     "answer": {
       "x": 89.447,
@@ -39,7 +39,7 @@
     "id": "b004",
     "title": "機関車でかくれんぼ",
     "category": "buyoyo",
-    "difficulty": 4,
+    "difficulty": 3,
     "image": "images/b004.jpg",
     "answer": {
       "x": 53.947,
@@ -75,7 +75,7 @@
     "id": "n002",
     "title": "公園でかくれんぼ1",
     "category": "naputa",
-    "difficulty": 2,
+    "difficulty": 1,
     "image": "images/n002.jpg",
     "answer": {
       "x": 38.657,
@@ -99,7 +99,7 @@
     "id": "n004",
     "title": "緑地でかくれんぼ",
     "category": "naputa",
-    "difficulty": 4,
+    "difficulty": 3,
     "image": "images/n004.jpg",
     "answer": {
       "x": 87.967,
@@ -121,9 +121,9 @@
   },
   {
     "id": "p002",
-    "title": "公園でかくれんぼ",
+    "title": "公園でかくれんぼ1",
     "category": "pokke",
-    "difficulty": 2,
+    "difficulty": 1,
     "image": "images/p002.jpg",
     "answer": {
       "x": 75.401,
@@ -133,7 +133,7 @@
   },
   {
     "id": "p003",
-    "title": "公園でかくれんぼ",
+    "title": "公園でかくれんぼ2",
     "category": "pokke",
     "difficulty": 2,
     "image": "images/p003.jpg",
@@ -145,9 +145,9 @@
   },
   {
     "id": "p004",
-    "title": "公園でかくれんぼ",
+    "title": "公園でかくれんぼ3",
     "category": "pokke",
-    "difficulty": 2,
+    "difficulty": 1,
     "image": "images/p004.jpg",
     "answer": {
       "x": 29.768,
@@ -159,7 +159,7 @@
     "id": "p005",
     "title": "お城でかくれんぼ",
     "category": "pokke",
-    "difficulty": 3,
+    "difficulty": 2,
     "image": "images/p005.jpg",
     "answer": {
       "x": 23.271,
@@ -171,7 +171,7 @@
     "id": "p006",
     "title": "岩場でかくれんぼ",
     "category": "pokke",
-    "difficulty": 3,
+    "difficulty": 2,
     "image": "images/p006.jpg",
     "answer": {
       "x": 19.073,
@@ -183,7 +183,7 @@
     "id": "p007",
     "title": "公園でかくれんぼ",
     "category": "pokke",
-    "difficulty": 4,
+    "difficulty": 3,
     "image": "images/p007.jpg",
     "answer": {
       "x": 34.581,
