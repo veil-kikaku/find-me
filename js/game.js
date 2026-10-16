@@ -277,7 +277,7 @@ photo.addEventListener('pointercancel',e=>finishPointer(e,true));
 photo.addEventListener('lostpointercapture',e=>finishPointer(e,true));
 photo.addEventListener('wheel',e=>{
  e.preventDefault();
-setZoom(zoom.scale*(e.deltaY<0?1.15:1/1.15),e.clientX,e.clientY);
+setZoom(zoom.scale + (e.deltaY < 0 ? 0.15 : -0.15),e.clientX,e.clientY);
 },{passive:false});
 $('zoomIn').onclick=()=>{const r=photo.getBoundingClientRect();
 setZoom(zoom.scale+0.5,r.left+r.width/2,r.top+r.height/2)};
