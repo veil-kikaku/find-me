@@ -280,9 +280,9 @@ photo.addEventListener('wheel',e=>{
 setZoom(zoom.scale*(e.deltaY<0?1.15:1/1.15),e.clientX,e.clientY);
 },{passive:false});
 $('zoomIn').onclick=()=>{const r=photo.getBoundingClientRect();
-setZoom(zoom.scale*1.5,r.left+r.width/2,r.top+r.height/2)};
+setZoom(zoom.scale+0.5,r.left+r.width/2,r.top+r.height/2)};
 $('zoomOut').onclick=()=>{const r=photo.getBoundingClientRect();
-setZoom(zoom.scale/1.5,r.left+r.width/2,r.top+r.height/2)};
+setZoom(zoom.scale-0.5,r.left+r.width/2,r.top+r.height/2)};
 $('zoomReset').onclick=resetZoom;
 window.addEventListener('resize',drawZoom);
 $('hint').onclick=()=>{if(!active)return;
