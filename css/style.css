@@ -434,3 +434,16 @@ button:focus-visible,a:focus-visible,input:focus-visible {
         width: 300px;
     }
 }
+
+/* 問題一覧のキャラクター見出し */
+#categoryTitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#categoryTitle img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}

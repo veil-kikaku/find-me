@@ -31,7 +31,23 @@ function showCategory(id) {
   $('play').hidden = true;
   $('homeButton').hidden = false;
   $('back').hidden = true;
-  $('categoryTitle').textContent = categories.find(c => c.id === id)?.name || '問題一覧';
+
+  const category = categories.find(c => c.id === id);
+  const title = $('categoryTitle');
+
+  title.replaceChildren();
+
+  if (category?.image) {
+      const img = document.createElement('img');
+      img.src = category.image;
+      img.alt = '';
+      title.append(img);
+  }
+
+  const name = document.createElement('span');
+  name.textContent = category?.name || '問題一覧';
+  title.append(name);
+  
   render();
   window.scrollTo(0, 0);
 }
