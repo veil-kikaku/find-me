@@ -171,8 +171,8 @@ function openQuestion(q){
 $('questionList').hidden=true;
 $('home').hidden=true;
 $('play').hidden=false;
-$('homeButton').hidden=true;
-$('back').hidden=false;
+$('homeButton').hidden = false;
+$('back').hidden = false;
 $('title').textContent=q.title;
 $('info').textContent =
     '難易度：' +
