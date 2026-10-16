@@ -129,11 +129,19 @@ zoom.gesture=null;
 drawZoom()}
 function showCorrectEffect() {
     const effect = $('correctEffect');
+    const image = $('correctImage');
+
+    const correctImages = {
+        buyoyo: 'images/correct/buyoyo.png',
+        naputa: 'images/correct/naputa.png',
+        pokke: 'images/correct/pokke.png'
+    };
+
+    image.src = correctImages[active.category] || '';
 
     effect.classList.remove('show');
     effect.hidden = false;
 
-    // アニメーションを最初から再生
     void effect.offsetWidth;
     effect.classList.add('show');
 }
