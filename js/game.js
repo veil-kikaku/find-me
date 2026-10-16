@@ -146,7 +146,7 @@ const description = document.querySelector('#play p.small');
 
 if (description) {
     description.textContent =
-        `写真の中の隠れた${characterName}をクリック・タップしよう` +
+        `写真の中の隠れた${characterName}をクリック・タップしよう！` +
         'ドラッグで移動、ホイール・ピンチで拡大縮小！';
 }
 
@@ -176,7 +176,7 @@ function answerAt(clientX,clientY){
 solved.add(active.id);
   localStorage.setItem('find-me-solved',JSON.stringify([...solved]));
 mark(active);
- }else $('message').textContent='おしい！もう一度探してみよう';
+ }
 }
 photo.addEventListener('pointerdown',e=>{
  if(e.pointerType==='mouse'&&e.button!==0)return;
