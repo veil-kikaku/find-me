@@ -243,7 +243,7 @@ function answerAt(clientX,clientY){
  if(ix<0||iy<0||ix>r.width||iy>r.height)return;
  const x=ix/r.width*100,y=iy/r.height*100;
  if(distance(active,x,y)<=active.answer.radius){
-     $('message').textContent='🎉 正解！';
+     $('message').textContent='';
      solved.add(active.id);
      localStorage.setItem('find-me-solved',JSON.stringify([...solved]));
      mark(active);
