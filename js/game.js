@@ -127,7 +127,7 @@ zoom.y=0;
 zoom.pointers.clear();
 zoom.gesture=null;
 drawZoom()}
-function showCorrectEffect() {
+async function showCorrectEffect() {
     const effect = $('correctEffect');
     const image = $('correctImage');
 
@@ -137,11 +137,27 @@ function showCorrectEffect() {
         pokke: 'images/correct/pokke.png'
     };
 
-    image.src = correctImages[active.category] || '';
+    const src = correctImages[active.category];
+    if (!src) return;
 
+    // いったん非表示にする
     effect.classList.remove('show');
-    effect.hidden = false;
+    effect.hidden = true;
 
+    // 新しい画像を読み込む
+    image.src = src;
+
+    try {
+        await image.decode();
+    } catch {
+        return;
+    }
+
+    // 読み込み中に別の問題へ移動していたら表示しない
+    if (!active || correctImages[active.category] !== src) return;
+
+    // 画像の準備ができてからアニメーション開始
+    effect.hidden = false;
     void effect.offsetWidth;
     effect.classList.add('show');
 }
@@ -178,6 +194,7 @@ $('message').textContent =
 $('answerMark').hidden=true;
 $('correctEffect').classList.remove('show');
 $('correctEffect').hidden = true;
+$('correctImage').removeAttribute('src');
 photoimg.src=q.image;
 resetZoom();
  photoimg.onload=()=>{photo.style.aspectRatio=`${photoimg.naturalWidth}/${photoimg.naturalHeight}`;
