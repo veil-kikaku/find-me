@@ -395,7 +395,7 @@ button:focus-visible,a:focus-visible,input:focus-visible {
 }
 
 #correctEffect.show {
-    animation: correctPop 1.2s ease-out forwards;
+    animation: correctPop 2s ease-out forwards;
 }
 
 @keyframes correctPop {
