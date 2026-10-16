@@ -186,11 +186,10 @@ const description = document.querySelector('#play p.small');
 if (description) {
     description.textContent =
         `写真の中の隠れた${characterName}をクリック・タップしよう！` +
-        'ドラッグで移動、ホイール・ピンチで拡大縮小！';
+        'ドラッグで移動！ホイール・ピンチで拡大縮小！';
 }
 
-$('message').textContent =
-    `隠れた${characterName}をクリック・タップしてね`;
+$('message').textContent = ``;
 $('answerMark').hidden=true;
 $('correctEffect').classList.remove('show');
 $('correctEffect').hidden = true;
