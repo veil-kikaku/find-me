@@ -127,6 +127,21 @@ zoom.y=0;
 zoom.pointers.clear();
 zoom.gesture=null;
 drawZoom()}
+function showCorrectEffect() {
+    const effect = $('correctEffect');
+
+    effect.classList.remove('show');
+    effect.hidden = false;
+
+    // アニメーションを最初から再生
+    void effect.offsetWidth;
+    effect.classList.add('show');
+}
+
+$('correctEffect').addEventListener('animationend', () => {
+    $('correctEffect').classList.remove('show');
+    $('correctEffect').hidden = true;
+});
 function openQuestion(q){
  active=q;
 $('questionList').hidden=true;
@@ -152,7 +167,9 @@ if (description) {
 
 $('message').textContent =
     `隠れた${characterName}をクリック・タップしてね`;
- $('answerMark').hidden=true;
+$('answerMark').hidden=true;
+$('correctEffect').classList.remove('show');
+$('correctEffect').hidden = true;
 photoimg.src=q.image;
 resetZoom();
  photoimg.onload=()=>{photo.style.aspectRatio=`${photoimg.naturalWidth}/${photoimg.naturalHeight}`;
@@ -172,10 +189,11 @@ function answerAt(clientX,clientY){
  if(ix<0||iy<0||ix>r.width||iy>r.height)return;
  const x=ix/r.width*100,y=iy/r.height*100;
  if(distance(active,x,y)<=active.answer.radius){
-  $('message').textContent='🎉 正解！';
-solved.add(active.id);
-  localStorage.setItem('find-me-solved',JSON.stringify([...solved]));
-mark(active);
+     $('message').textContent='🎉 正解！';
+     solved.add(active.id);
+     localStorage.setItem('find-me-solved',JSON.stringify([...solved]));
+     mark(active);
+     showCorrectEffect();
  }
 }
 photo.addEventListener('pointerdown',e=>{

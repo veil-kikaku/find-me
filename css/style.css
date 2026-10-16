@@ -371,3 +371,51 @@ button:focus-visible,a:focus-visible,input:focus-visible {
     height: 36px;
     object-fit: contain;
 }
+
+/* 正解アニメーション */
+#correctEffect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+
+    color: #fff;
+    font-size: clamp(30px, 6vw, 60px);
+    font-weight: 900;
+    white-space: nowrap;
+
+    text-shadow:
+        0 3px 8px #0009,
+        0 0 18px #ff9800;
+
+    opacity: 0;
+}
+
+#correctEffect.show {
+    animation: correctPop 1.2s ease-out forwards;
+}
+
+@keyframes correctPop {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.4);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    35%, 75% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
