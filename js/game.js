@@ -52,14 +52,50 @@ function showCategory(id) {
   window.scrollTo(0, 0);
 }
 
-// ブラウザの「戻る」「進む」に対応する画面履歴
+// 問題ごとの共有URLとブラウザの「戻る」「進む」を管理する
+function pageUrl(state) {
+  const url = new URL(window.location.href);
+  url.searchParams.delete('question');
+  url.searchParams.delete('category');
+  if (state.page === 'category') {
+    url.searchParams.set('category', state.category);
+  } else if (state.page === 'question') {
+    url.searchParams.set('category', state.category);
+    url.searchParams.set('question', String(state.questionId));
+  }
+  return url.pathname + url.search + url.hash;
+}
+
 function navigate(state) {
+  const next = { veilKakurenbo: true, ...state };
+  const url = pageUrl(state);
   const previous = history.state;
   if (previous?.veilKakurenbo &&
       previous.page === state.page &&
       previous.category === state.category &&
-      previous.questionId === state.questionId) return;
-  history.pushState({ veilKakurenbo: true, ...state }, '');
+      String(previous.questionId ?? '') === String(state.questionId ?? '')) {
+    if (location.pathname + location.search + location.hash !== url) {
+      history.replaceState(next, '', url);
+    }
+    return;
+  }
+  history.pushState(next, '', url);
+}
+
+function stateFromUrl() {
+  const params = new URLSearchParams(location.search);
+  const category = params.get('category');
+  const questionId = params.get('question');
+  if (questionId !== null) {
+    const q = questions.find(q => String(q.id) === questionId &&
+      (category === null || (q.category || 'uncategorized') === category));
+    if (q) return { veilKakurenbo: true, page: 'question',
+      category: q.category || 'uncategorized', questionId: q.id };
+  }
+  if (category && categories.some(c => c.id === category)) {
+    return { veilKakurenbo: true, page: 'category', category };
+  }
+  return { veilKakurenbo: true, page: 'home' };
 }
 
 const renderHome = showHome;
@@ -83,7 +119,8 @@ openQuestion = function (q) {
 
 function restorePage(state) {
   if (state?.veilKakurenbo && state.page === 'question') {
-    const q = questions.find(q => q.id === state.questionId);
+    const q = questions.find(q => String(q.id) === String(state.questionId) &&
+      (q.category || 'uncategorized') === state.category);
     if (q) {
       currentCategory = q.category;
       renderQuestion(q);
@@ -99,7 +136,7 @@ function restorePage(state) {
 }
 
 window.addEventListener('popstate', event => {
-  if (questions.length && categories.length) restorePage(event.state);
+  if (questions.length && categories.length) restorePage(event.state?.veilKakurenbo ? event.state : stateFromUrl());
 });
 
 function renderCategories() {
@@ -270,6 +307,7 @@ if (description) {
 }
 
 $('message').textContent = ``;
+$('shareStatus').textContent = '';
 $('answerMark').hidden=true;
 $('correctEffect').classList.remove('show');
 $('correctEffect').hidden = true;
@@ -311,6 +349,20 @@ if (siteTitle) {
   `;
   document.head.append(titleStyle);
 }
+
+// 問題ページのURLをクリップボードへコピーする
+$('shareQuestion').addEventListener('click', async () => {
+  if (!active) return;
+  const url = new URL(pageUrl({ page: 'question', category: active.category || 'uncategorized', questionId: active.id }), location.origin).href;
+  try {
+    await navigator.clipboard.writeText(url);
+    $('shareStatus').textContent = 'URLをコピーしました！';
+  } catch (error) {
+    // クリップボードが使えない環境でもURLを手動コピーできるようにする
+    window.prompt('このURLをコピーして共有してください', url);
+    $('shareStatus').textContent = '';
+  }
+});
 
 $('homeButton').onclick = showHome;
 $('back').onclick = () => {
@@ -417,10 +469,10 @@ Promise.all([
     categories.push({ id: 'uncategorized', name: '未分類（既存の問題）', icon: '📷' });
   }
   renderCategories();
-  if (!history.state?.veilKakurenbo) {
-    history.replaceState({ veilKakurenbo: true, page: 'home' }, '');
-  }
-  restorePage(history.state);
+  // 共有リンクから直接アクセスした場合も対象の問題を開く
+  const initialState = stateFromUrl();
+  history.replaceState(initialState, '', pageUrl(initialState));
+  restorePage(initialState);
 }).catch(error => {
   $('categories').textContent = 'データを読み込めませんでした。GitHub Pagesで開いてください。';
   console.error(error);

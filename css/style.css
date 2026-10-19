@@ -487,3 +487,21 @@ html {
     box-shadow: none;
     filter: none;
 }
+
+/* 問題ページの共有リンク */
+.share-question {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 8px 0 12px;
+}
+.share-question button {
+    margin: 0 !important;
+    font-size: 13px;
+    padding: 7px 12px;
+}
+#shareStatus {
+    font-size: 13px;
+    color: #65452f;
+}
