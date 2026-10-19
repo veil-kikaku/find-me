@@ -465,3 +465,14 @@ button:focus-visible,a:focus-visible,input:focus-visible {
 html {
     scrollbar-gutter: stable;
 }
+
+.site-title {
+    background: transparent !important;
+    box-shadow: none;
+    border: none;
+}
+
+.site-title:hover {
+    background: transparent !important;
+    opacity: 0.8;
+}
