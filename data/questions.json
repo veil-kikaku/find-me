@@ -97,10 +97,22 @@
   },
   {
     "id": "n004",
-    "title": "緑地でかくれんぼ",
+    "title": "緑地でかくれんぼ1",
+    "category": "naputa",
+    "difficulty": 1,
+    "image": "images/questions/n004.jpg",
+    "answer": {
+      "x": 93.725,
+      "y": 16.095,
+      "radius": 2
+    }
+  },
+  {
+    "id": "n005",
+    "title": "緑地でかくれんぼ2",
     "category": "naputa",
     "difficulty": 3,
-    "image": "images/questions/n004.jpg",
+    "image": "images/questions/n005.jpg",
     "answer": {
       "x": 87.967,
       "y": 20.172,
