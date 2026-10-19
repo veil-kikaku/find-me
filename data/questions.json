@@ -144,6 +144,18 @@
     }
   },
   {
+    "id": "n008",
+    "title": "公園でかくれんぼ5",
+    "category": "naputa",
+    "difficulty": 2,
+    "image": "images/questions/n008.jpg",
+    "answer": {
+      "x": 55.094,
+      "y": 54.003,
+      "radius": 2
+    }
+  },
+  {
     "id": "p001",
     "title": "練習問題",
     "category": "pokke",
