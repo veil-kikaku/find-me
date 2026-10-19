@@ -52,6 +52,56 @@ function showCategory(id) {
   window.scrollTo(0, 0);
 }
 
+// ブラウザの「戻る」「進む」に対応する画面履歴
+function navigate(state) {
+  const previous = history.state;
+  if (previous?.veilKakurenbo &&
+      previous.page === state.page &&
+      previous.category === state.category &&
+      previous.questionId === state.questionId) return;
+  history.pushState({ veilKakurenbo: true, ...state }, '');
+}
+
+const renderHome = showHome;
+const renderCategory = showCategory;
+const renderQuestion = openQuestion;
+
+showHome = function () {
+  navigate({ page: 'home' });
+  renderHome();
+};
+
+showCategory = function (id) {
+  navigate({ page: 'category', category: id });
+  renderCategory(id);
+};
+
+openQuestion = function (q) {
+  navigate({ page: 'question', category: q.category, questionId: q.id });
+  renderQuestion(q);
+};
+
+function restorePage(state) {
+  if (state?.veilKakurenbo && state.page === 'question') {
+    const q = questions.find(q => q.id === state.questionId);
+    if (q) {
+      currentCategory = q.category;
+      renderQuestion(q);
+      return;
+    }
+  }
+  if (state?.veilKakurenbo && state.page === 'category' &&
+      categories.some(c => c.id === state.category)) {
+    renderCategory(state.category);
+    return;
+  }
+  renderHome();
+}
+
+window.addEventListener('popstate', event => {
+  if (questions.length && categories.length) restorePage(event.state);
+});
+
 function renderCategories() {
   const root = $('categories');
   root.replaceChildren();
@@ -335,7 +385,10 @@ Promise.all([
     categories.push({ id: 'uncategorized', name: '未分類（既存の問題）', icon: '📷' });
   }
   renderCategories();
-  showHome();
+  if (!history.state?.veilKakurenbo) {
+    history.replaceState({ veilKakurenbo: true, page: 'home' }, '');
+  }
+  restorePage(history.state);
 }).catch(error => {
   $('categories').textContent = 'データを読み込めませんでした。GitHub Pagesで開いてください。';
   console.error(error);
