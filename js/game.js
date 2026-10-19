@@ -307,7 +307,6 @@ if (description) {
 }
 
 $('message').textContent = ``;
-$('shareStatus').textContent = '';
 $('answerMark').hidden=true;
 $('correctEffect').classList.remove('show');
 $('correctEffect').hidden = true;
@@ -349,20 +348,6 @@ if (siteTitle) {
   `;
   document.head.append(titleStyle);
 }
-
-// 問題ページのURLをクリップボードへコピーする
-$('shareQuestion').addEventListener('click', async () => {
-  if (!active) return;
-  const url = new URL(pageUrl({ page: 'question', category: active.category || 'uncategorized', questionId: active.id }), location.origin).href;
-  try {
-    await navigator.clipboard.writeText(url);
-    $('shareStatus').textContent = 'URLをコピーしました！';
-  } catch (error) {
-    // クリップボードが使えない環境でもURLを手動コピーできるようにする
-    window.prompt('このURLをコピーして共有してください', url);
-    $('shareStatus').textContent = '';
-  }
-});
 
 $('homeButton').onclick = showHome;
 $('back').onclick = () => {
