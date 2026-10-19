@@ -476,3 +476,14 @@ html {
     background: transparent !important;
     opacity: 0.8;
 }
+/* ヘッダータイトルのリンクはボタン装飾を適用しない */
+.site-title > a,
+.site-title > a:hover {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    filter: none;
+}
