@@ -280,6 +280,38 @@ resetZoom();
 drawZoom()};
  window.scrollTo(0,0);
 }
+// ヘッダーのロゴとタイトルをトップ画面へのリンクにする。
+// 通常クリックは画面を切り替え、Ctrl+クリック等は通常のリンクとして扱う。
+const siteTitle = document.querySelector('.site-title');
+if (siteTitle) {
+  const titleLink = document.createElement('a');
+  titleLink.href = './';
+  titleLink.setAttribute('aria-label', 'キャラクター選択画面に戻る');
+  while (siteTitle.firstChild) titleLink.append(siteTitle.firstChild);
+  siteTitle.append(titleLink);
+  titleLink.addEventListener('click', event => {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    showHome();
+  });
+  const titleStyle = document.createElement('style');
+  titleStyle.textContent = `
+    .site-title > a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: inherit;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+    }
+    .site-title > a:hover { opacity: 0.8; }
+    .site-title > a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 4px; }
+  `;
+  document.head.append(titleStyle);
+}
+
 $('homeButton').onclick = showHome;
 $('back').onclick = () => {
   if (currentCategory) showCategory(currentCategory);
