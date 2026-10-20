@@ -618,10 +618,12 @@ html {
     }
 }
 
-/* 問題画面のクリア表示：一覧のバッジと色・形を統一 */
+/* 問題画面のクリア表示：バッジが行の高さを変えないようにする */
+#info { position: relative; }
 .play-clear-badge {
-    display: inline-block;
-    vertical-align: middle;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     margin-left: 12px;
     padding: 5px 9px;
     border-radius: 999px;
