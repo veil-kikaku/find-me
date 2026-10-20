@@ -13,6 +13,16 @@ $('questionSort').addEventListener('change', event => {
   if (currentCategory) render();
 });
 
+// 未クリアのみ表示する設定は、並び順とは独立して保存する
+const UNSOLVED_KEY = 'veil-kakurenbo-unsolved-only';
+let unsolvedOnly = localStorage.getItem(UNSOLVED_KEY) === 'true';
+$('unsolvedOnly').checked = unsolvedOnly;
+$('unsolvedOnly').addEventListener('change', event => {
+  unsolvedOnly = event.target.checked;
+  localStorage.setItem(UNSOLVED_KEY, String(unsolvedOnly));
+  if (currentCategory) render();
+});
+
 function orderedQuestions(categoryId) {
   const list = questions.map((q, index) => ({ q, index }))
     .filter(item => (item.q.category || 'uncategorized') === categoryId);
@@ -325,9 +335,12 @@ async function loadUpdates() {
 
 function render() {
   $('list').replaceChildren();
-  const filtered = orderedQuestions(currentCategory);
+  const ordered = orderedQuestions(currentCategory);
+  const filtered = unsolvedOnly ? ordered.filter(q => !solved.has(q.id)) : ordered;
   if (!filtered.length) {
-    $('list').textContent = 'このキャラクターの問題はまだありません。';
+    $('list').textContent = unsolvedOnly && ordered.length
+      ? 'このキャラクターの問題はすべてクリア済みです！'
+      : 'このキャラクターの問題はまだありません。';
     return;
   }
   filtered.forEach(q => {

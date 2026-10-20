@@ -638,3 +638,33 @@ html {
 @media (max-width: 600px) {
     .play-clear-badge { padding: 4px 7px; font-size: 11px; }
 }
+
+/* 問題一覧：並び順と独立した「未クリアのみ」フィルター */
+.question-list-filters {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+}
+.unsolved-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    font-size: 14px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.unsolved-control input[type="checkbox"] {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    padding: 0;
+    accent-color: #e58b55;
+    cursor: pointer;
+}
+@media (max-width: 600px) {
+    .question-list-filters { justify-content: flex-start; }
+}
