@@ -1,6 +1,30 @@
 let questions=[],categories=[],currentCategory=null,active=null,solved=new Set(JSON.parse(localStorage.getItem('find-me-solved')||'[]'));
 const $=id=>document.getElementById(id);
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+// 並び順はブラウザに保存し、問題一覧と前後移動で共通利用する
+const SORT_KEY = 'veil-kakurenbo-question-sort';
+const SORT_OPTIONS = ['new', 'old', 'easy', 'hard'];
+let questionSort = localStorage.getItem(SORT_KEY) || 'new';
+if (!SORT_OPTIONS.includes(questionSort)) questionSort = 'new';
+$('questionSort').value = questionSort;
+$('questionSort').addEventListener('change', event => {
+  questionSort = SORT_OPTIONS.includes(event.target.value) ? event.target.value : 'new';
+  localStorage.setItem(SORT_KEY, questionSort);
+  if (currentCategory) render();
+});
+
+function orderedQuestions(categoryId) {
+  const list = questions.map((q, index) => ({ q, index }))
+    .filter(item => (item.q.category || 'uncategorized') === categoryId);
+  list.sort((a, b) => {
+    if (questionSort === 'new') return b.index - a.index;
+    if (questionSort === 'old') return a.index - b.index;
+    const diff = Number(a.q.difficulty) - Number(b.q.difficulty);
+    return questionSort === 'easy' ? (diff || b.index - a.index) : (-diff || b.index - a.index);
+  });
+  return list.map(item => item.q);
+}
+
 function distance(q,x,y){const img=$('photoimg');
 const w=img.naturalWidth,h=img.naturalHeight;
 return Math.hypot((x-q.answer.x)*w/100,(y-q.answer.y)*h/100)/Math.min(w,h)*100}
@@ -176,7 +200,7 @@ function renderCategories() {
 
 function render() {
   $('list').replaceChildren();
-  const filtered = questions.filter(q => (q.category || 'uncategorized') === currentCategory);
+  const filtered = orderedQuestions(currentCategory);
   if (!filtered.length) {
     $('list').textContent = 'このキャラクターの問題はまだありません。';
     return;
@@ -272,8 +296,7 @@ $('correctEffect').addEventListener('animationend', () => {
 });
 // 現在のキャラクター内で、問題一覧と同じ並び順を使う
 function adjacentQuestions(q) {
-  const sameCategory = questions.filter(item =>
-    (item.category || 'uncategorized') === (q.category || 'uncategorized'));
+  const sameCategory = orderedQuestions(q.category || 'uncategorized');
   const index = sameCategory.findIndex(item => String(item.id) === String(q.id));
   return {
     previous: index > 0 ? sameCategory[index - 1] : null,

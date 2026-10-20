@@ -33,7 +33,17 @@
     <div class="category-grid" id="categories"></div>
    </section>
    <section id="questionList" hidden>
-    <h2 id="categoryTitle"></h2>
+    <div class="question-list-header">
+      <h2 id="categoryTitle"></h2>
+      <label class="sort-control" for="questionSort">並び順
+        <select id="questionSort">
+          <option value="new">新しい順</option>
+          <option value="old">古い順</option>
+          <option value="easy">難易度が低い順</option>
+          <option value="hard">難易度が高い順</option>
+        </select>
+      </label>
+     </div>
     <div class="cards" id="list"></div>
    </section>
    <section hidden="" id="play">

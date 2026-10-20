@@ -487,3 +487,35 @@ html {
     box-shadow: none;
     filter: none;
 }
+
+
+/* 問題一覧の並び順セレクター */
+.question-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin-bottom: 14px;
+}
+.question-list-header #categoryTitle { margin: 0; }
+.sort-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    white-space: nowrap;
+    font-size: 14px;
+}
+.sort-control select {
+    width: auto;
+    min-width: 150px;
+    max-width: 100%;
+    margin: 0;
+    padding: 8px 10px;
+    border: 1px solid #eddcca;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    font: inherit;
+}
