@@ -519,3 +519,31 @@ html {
     color: #333;
     font: inherit;
 }
+
+/* トップページ：新着問題のお知らせ */
+.updates-panel {
+    margin-top: 30px;
+    padding: 18px 20px;
+    background: #fff;
+    border: 1px solid #eddcca;
+    border-radius: 16px;
+}
+.updates-panel h2 { margin: 0 0 12px; }
+.updates-entry { padding: 12px 0; border-bottom: 1px solid #f1e5d6; }
+.updates-entry:last-child { border-bottom: 0; }
+.updates-entry time { display: block; font-weight: 700; margin-bottom: 5px; }
+.updates-entry ul { margin: 0; padding-left: 1.4em; }
+.updates-entry li { line-height: 1.8; }
+.updates-entry a {
+    background: transparent;
+    color: #a85124;
+    padding: 0;
+    border-radius: 0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.updates-entry a:hover { color: #823c1a; }
+#updatesMore { display: block; margin: 16px auto 0; }
+@media (max-width: 600px) {
+    .updates-panel { padding: 14px; }
+}

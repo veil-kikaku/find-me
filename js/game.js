@@ -198,6 +198,91 @@ function renderCategories() {
   });
 }
 
+// 新着問題のお知らせ：同日の追加はまとめ、最新5日分を初期表示
+let updateEntries = [];
+let updatesExpanded = false;
+
+function normalizeUpdates(records) {
+  const grouped = new Map();
+  if (!Array.isArray(records)) return [];
+  for (const record of records) {
+    if (!record || typeof record.date !== 'string' ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(record.date) ||
+        !Array.isArray(record.additions)) continue;
+    if (!grouped.has(record.date)) grouped.set(record.date, new Map());
+    const day = grouped.get(record.date);
+    for (const item of record.additions) {
+      if (!item || typeof item.category !== 'string' ||
+          !categories.some(c => c.id === item.category)) continue;
+      const count = Number(item.count);
+      if (!Number.isSafeInteger(count) || count <= 0) continue;
+      day.set(item.category, (day.get(item.category) || 0) + count);
+    }
+  }
+  return [...grouped.entries()]
+    .map(([date, additions]) => ({date, additions: [...additions.entries()]}))
+    .filter(entry => entry.additions.length)
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+function renderUpdates() {
+  const list = $('updatesList');
+  const more = $('updatesMore');
+  list.replaceChildren();
+  if (!updateEntries.length) {
+    list.textContent = '新しい問題の追加情報はまだありません。';
+    more.hidden = true;
+    return;
+  }
+  const visible = updatesExpanded ? updateEntries : updateEntries.slice(0, 5);
+  for (const entry of visible) {
+    const article = document.createElement('article');
+    article.className = 'updates-entry';
+    const date = document.createElement('time');
+    date.dateTime = entry.date;
+    date.textContent = entry.date.replaceAll('-', '.');
+    article.append(date);
+    const ul = document.createElement('ul');
+    for (const [categoryId, count] of entry.additions) {
+      const category = categories.find(c => c.id === categoryId);
+      const li = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = pageUrl({page: 'category', category: categoryId});
+      link.textContent = category.name;
+      link.addEventListener('click', event => {
+        if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        showCategory(categoryId);
+      });
+      li.append(link, document.createTextNode(` の問題を${count}問追加しました！`));
+      ul.append(li);
+    }
+    article.append(ul);
+    list.append(article);
+  }
+  more.hidden = updateEntries.length <= 5;
+  more.textContent = updatesExpanded ? '閉じる' : 'もっと見る';
+  more.setAttribute('aria-expanded', String(updatesExpanded));
+}
+
+$('updatesMore').addEventListener('click', () => {
+  updatesExpanded = !updatesExpanded;
+  renderUpdates();
+});
+
+async function loadUpdates() {
+  try {
+    const response = await fetch('data/updates.json', {cache: 'no-store'});
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    updateEntries = normalizeUpdates(await response.json());
+    renderUpdates();
+  } catch (error) {
+    $('updatesList').textContent = '更新履歴を読み込めませんでした。';
+    $('updatesMore').hidden = true;
+    console.warn('更新履歴の読み込み失敗', error);
+  }
+}
+
 function render() {
   $('list').replaceChildren();
   const filtered = orderedQuestions(currentCategory);
@@ -502,6 +587,7 @@ Promise.all([
     categories.push({ id: 'uncategorized', name: '未分類（既存の問題）', icon: '📷' });
   }
   renderCategories();
+  loadUpdates();
   // 共有リンクから直接アクセスした場合も対象の問題を開く
   const initialState = stateFromUrl();
   history.replaceState(initialState, '', pageUrl(initialState));
