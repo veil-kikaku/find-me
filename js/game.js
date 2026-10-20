@@ -4,11 +4,11 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 // 並び順はブラウザに保存し、問題一覧と前後移動で共通利用する
 const SORT_KEY = 'veil-kakurenbo-question-sort';
 const SORT_OPTIONS = ['new', 'old', 'easy', 'hard'];
-let questionSort = localStorage.getItem(SORT_KEY) || 'new';
-if (!SORT_OPTIONS.includes(questionSort)) questionSort = 'new';
+let questionSort = localStorage.getItem(SORT_KEY) || 'old';
+if (!SORT_OPTIONS.includes(questionSort)) questionSort = 'old';
 $('questionSort').value = questionSort;
 $('questionSort').addEventListener('change', event => {
-  questionSort = SORT_OPTIONS.includes(event.target.value) ? event.target.value : 'new';
+  questionSort = SORT_OPTIONS.includes(event.target.value) ? event.target.value : 'old';
   localStorage.setItem(SORT_KEY, questionSort);
   if (currentCategory) render();
 });
