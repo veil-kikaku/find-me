@@ -20,7 +20,7 @@ function orderedQuestions(categoryId) {
     if (questionSort === 'new') return b.index - a.index;
     if (questionSort === 'old') return a.index - b.index;
     const diff = Number(a.q.difficulty) - Number(b.q.difficulty);
-    return questionSort === 'easy' ? (diff || b.index - a.index) : (-diff || b.index - a.index);
+    return questionSort === 'easy' ? (diff || a.index - b.index) : (-diff || a.index - b.index);
   });
   return list.map(item => item.q);
 }
