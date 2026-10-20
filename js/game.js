@@ -444,10 +444,26 @@ $('correctEffect').addEventListener('animationend', () => {
 function adjacentQuestions(q) {
   const sameCategory = orderedQuestions(q.category || 'uncategorized');
   const index = sameCategory.findIndex(item => String(item.id) === String(q.id));
-  return {
-    previous: index > 0 ? sameCategory[index - 1] : null,
-    next: index >= 0 && index < sameCategory.length - 1 ? sameCategory[index + 1] : null
-  };
+  if (index < 0) return { previous: null, next: null };
+
+  // 現在の問題が正解済みになっても、その位置から次の未クリアを探す。
+  const eligible = item => !unsolvedOnly || !solved.has(item.id);
+  let previous = null;
+  let next = null;
+  for (let i = index - 1; i >= 0; i--) {
+    if (eligible(sameCategory[i])) { previous = sameCategory[i]; break; }
+  }
+  for (let i = index + 1; i < sameCategory.length; i++) {
+    if (eligible(sameCategory[i])) { next = sameCategory[i]; break; }
+  }
+  return { previous, next };
+}
+
+function updateAdjacentButtons() {
+  if (!active) return;
+  const adjacent = adjacentQuestions(active);
+  $('prevQuestion').disabled = !adjacent.previous;
+  $('nextQuestion').disabled = !adjacent.next;
 }
 
 // 問題画面の難易度とクリアバッジを更新する
@@ -465,9 +481,7 @@ function renderPlayInfo(q) {
 
 function openQuestion(q){
  active=q;
- const adjacent = adjacentQuestions(q);
- $('prevQuestion').disabled = !adjacent.previous;
- $('nextQuestion').disabled = !adjacent.next;
+ updateAdjacentButtons();
 $('questionList').hidden=true;
 $('home').hidden=true;
 $('play').hidden=false;
@@ -561,6 +575,7 @@ function answerAt(clientX,clientY){
      localStorage.setItem('find-me-solved',JSON.stringify([...solved]));
      renderClearProgress();
      renderPlayInfo(active);
+     updateAdjacentButtons();
      mark(active);
      showCorrectEffect();
  }
