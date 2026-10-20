@@ -10,6 +10,7 @@ m.style.left=q.answer.x+'%';
 m.style.top=q.answer.y+'%';
 m.style.width=d+'%';
 m.style.height=(q.answer.radius*2*Math.min(img.naturalWidth,img.naturalHeight)/img.naturalHeight)+'%';
+m.style.borderWidth = (window.matchMedia('(max-width: 600px)').matches && q.answer.radius <= 2) ? '1.5px' : '3px';
 m.hidden=false}
 function showHome() {
   active = null;
