@@ -338,13 +338,21 @@ function render() {
     img.alt = '問題写真';
     const h = document.createElement('h3');
     h.textContent = q.title;
+    const photoWrap = document.createElement('div');
+    photoWrap.className = 'card-photo';
+    photoWrap.append(img);
+    if (solved.has(q.id)) {
+      const badge = document.createElement('span');
+      badge.className = 'card-clear-badge';
+      badge.textContent = '✓ クリア';
+      photoWrap.append(badge);
+    }
     const p = document.createElement('p');
-    p.textContent = '★'.repeat(q.difficulty) + '☆'.repeat(5 - q.difficulty) +
-      (solved.has(q.id) ? '　✓ クリア' : '');
+    p.textContent = '★'.repeat(q.difficulty) + '☆'.repeat(5 - q.difficulty);
     const b = document.createElement('button');
     b.textContent = '挑戦する';
     b.onclick = () => openQuestion(q);
-    card.append(img, h, p, b);
+    card.append(photoWrap, h, p, b);
     $('list').append(card);
   });
 }
