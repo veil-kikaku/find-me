@@ -262,5 +262,17 @@
       "y": 41.558,
       "radius": 2
     }
+  },
+  {
+    "id": "b008",
+    "title": "公園でかくれんぼ5",
+    "category": "buyoyo",
+    "difficulty": 3,
+    "image": "images/questions/b008.jpg",
+    "answer": {
+      "x": 21.317,
+      "y": 53.79,
+      "radius": 2
+    }
   }
 ]
