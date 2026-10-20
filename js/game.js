@@ -437,6 +437,19 @@ function adjacentQuestions(q) {
   };
 }
 
+// 問題画面の難易度とクリアバッジを更新する
+function renderPlayInfo(q) {
+  const info = $('info');
+  info.replaceChildren();
+  info.append(document.createTextNode('難易度：' + '★'.repeat(q.difficulty) + '☆'.repeat(5 - q.difficulty)));
+  if (solved.has(q.id)) {
+    const badge = document.createElement('span');
+    badge.className = 'play-clear-badge';
+    badge.textContent = '✓ クリア';
+    info.append(badge);
+  }
+}
+
 function openQuestion(q){
  active=q;
  const adjacent = adjacentQuestions(q);
@@ -448,11 +461,7 @@ $('play').hidden=false;
 $('homeButton').hidden = false;
 $('back').hidden = false;
 $('title').textContent=q.title;
-$('info').textContent =
-    '難易度：' +
-    '★'.repeat(q.difficulty) +
-    '☆'.repeat(5 - q.difficulty) +
-    (solved.has(q.id) ? '　✓ クリア' : '');
+renderPlayInfo(q);
 const category = categories.find(c => c.id === q.category);
 const characterName = category?.name || 'キャラ';
 
@@ -538,9 +547,7 @@ function answerAt(clientX,clientY){
      solved.add(active.id);
      localStorage.setItem('find-me-solved',JSON.stringify([...solved]));
      renderClearProgress();
-     $('info').textContent = '難易度：' +
-       '★'.repeat(active.difficulty) +
-       '☆'.repeat(5 - active.difficulty) + '　✓ クリア';
+     renderPlayInfo(active);
      mark(active);
      showCorrectEffect();
  }

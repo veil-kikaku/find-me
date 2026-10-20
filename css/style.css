@@ -617,3 +617,22 @@ html {
         font-size: 11px;
     }
 }
+
+/* 問題画面のクリア表示：一覧のバッジと色・形を統一 */
+.play-clear-badge {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 12px;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: #e98b50;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+    box-shadow: 0 1px 4px #0003;
+    white-space: nowrap;
+}
+@media (max-width: 600px) {
+    .play-clear-badge { padding: 4px 7px; font-size: 11px; }
+}
