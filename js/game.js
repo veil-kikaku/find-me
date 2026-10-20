@@ -443,7 +443,8 @@ $('title').textContent=q.title;
 $('info').textContent =
     '難易度：' +
     '★'.repeat(q.difficulty) +
-    '☆'.repeat(5 - q.difficulty);
+    '☆'.repeat(5 - q.difficulty) +
+    (solved.has(q.id) ? '　✓ クリア' : '');
 const category = categories.find(c => c.id === q.category);
 const characterName = category?.name || 'キャラ';
 
@@ -529,6 +530,9 @@ function answerAt(clientX,clientY){
      solved.add(active.id);
      localStorage.setItem('find-me-solved',JSON.stringify([...solved]));
      renderClearProgress();
+     $('info').textContent = '難易度：' +
+       '★'.repeat(active.difficulty) +
+       '☆'.repeat(5 - active.difficulty) + '　✓ クリア';
      mark(active);
      showCorrectEffect();
  }
