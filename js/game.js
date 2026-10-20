@@ -270,8 +270,22 @@ $('correctEffect').addEventListener('animationend', () => {
     $('correctEffect').classList.remove('show');
     $('correctEffect').hidden = true;
 });
+// 現在のキャラクター内で、問題一覧と同じ並び順を使う
+function adjacentQuestions(q) {
+  const sameCategory = questions.filter(item =>
+    (item.category || 'uncategorized') === (q.category || 'uncategorized'));
+  const index = sameCategory.findIndex(item => String(item.id) === String(q.id));
+  return {
+    previous: index > 0 ? sameCategory[index - 1] : null,
+    next: index >= 0 && index < sameCategory.length - 1 ? sameCategory[index + 1] : null
+  };
+}
+
 function openQuestion(q){
  active=q;
+ const adjacent = adjacentQuestions(q);
+ $('prevQuestion').disabled = !adjacent.previous;
+ $('nextQuestion').disabled = !adjacent.next;
 $('questionList').hidden=true;
 $('home').hidden=true;
 $('play').hidden=false;
@@ -433,6 +447,16 @@ setZoom(zoom.scale+0.5,r.left+r.width/2,r.top+r.height/2)};
 $('zoomOut').onclick=()=>{const r=photo.getBoundingClientRect();
 setZoom(zoom.scale-0.5,r.left+r.width/2,r.top+r.height/2)};
 $('zoomReset').onclick=resetZoom;
+$('prevQuestion').onclick = () => {
+  if (!active) return;
+  const previous = adjacentQuestions(active).previous;
+  if (previous) openQuestion(previous);
+};
+$('nextQuestion').onclick = () => {
+  if (!active) return;
+  const next = adjacentQuestions(active).next;
+  if (next) openQuestion(next);
+};
 window.addEventListener('resize',drawZoom);
 $('hint').onclick=()=>{if(!active)return;
 const x=active.answer.x,y=active.answer.y;
