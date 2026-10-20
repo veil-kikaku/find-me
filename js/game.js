@@ -229,7 +229,7 @@ function renderClearProgress() {
     block.append(header, track);
     return block;
   };
-  root.append(progressRow('全体のクリア率', questions, true));
+  root.append(progressRow('全体', questions, true));
   const groups = make('div', 'progress-groups');
   for (const category of categories) {
     const entries = questions.filter(q => (q.category || 'uncategorized') === category.id);
