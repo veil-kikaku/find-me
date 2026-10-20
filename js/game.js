@@ -338,9 +338,10 @@ function render() {
   const ordered = orderedQuestions(currentCategory);
   const filtered = unsolvedOnly ? ordered.filter(q => !solved.has(q.id)) : ordered;
   if (!filtered.length) {
+    const categoryName = categories.find(c => c.id === currentCategory)?.name || 'このキャラクター';
     $('list').textContent = unsolvedOnly && ordered.length
-      ? 'このキャラクターの問題はすべてクリア済みです！'
-      : 'このキャラクターの問題はまだありません。';
+      ? `${categoryName}の問題はすべてクリア済みです！`
+      : `${categoryName}の問題はまだありません。`;
     return;
   }
   filtered.forEach(q => {
