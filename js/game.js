@@ -198,6 +198,46 @@ function renderCategories() {
   });
 }
 
+
+// クリア記録（localStorage）から全体・キャラクター別の進捗を計算
+function renderClearProgress() {
+  const root = $('clearProgress');
+  if (!root) return;
+  root.replaceChildren();
+  const make = (tag, className, value) => {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    if (value !== undefined) el.textContent = value;
+    return el;
+  };
+  const progressRow = (label, entries, overall = false) => {
+    const total = entries.length;
+    const done = entries.filter(q => solved.has(q.id)).length;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    const block = make('div', overall ? 'progress-item progress-overall' : 'progress-item');
+    const header = make('div', 'progress-heading');
+    header.append(make('strong', '', label), make('span', '', `${done} / ${total}問（${pct}%）`));
+    const track = make('div', 'progress-track');
+    track.setAttribute('role', 'progressbar');
+    track.setAttribute('aria-label', label + 'のクリア率');
+    track.setAttribute('aria-valuemin', '0');
+    track.setAttribute('aria-valuemax', '100');
+    track.setAttribute('aria-valuenow', String(pct));
+    const fill = make('div', 'progress-fill');
+    fill.style.width = pct + '%';
+    track.append(fill);
+    block.append(header, track);
+    return block;
+  };
+  root.append(progressRow('全体のクリア率', questions, true));
+  const groups = make('div', 'progress-groups');
+  for (const category of categories) {
+    const entries = questions.filter(q => (q.category || 'uncategorized') === category.id);
+    if (entries.length) groups.append(progressRow(category.name, entries));
+  }
+  root.append(groups);
+}
+
 // 新着問題のお知らせ：同日の追加はまとめ、最新5日分を初期表示
 let updateEntries = [];
 let updatesExpanded = false;
@@ -488,6 +528,7 @@ function answerAt(clientX,clientY){
      $('message').textContent='';
      solved.add(active.id);
      localStorage.setItem('find-me-solved',JSON.stringify([...solved]));
+     renderClearProgress();
      mark(active);
      showCorrectEffect();
  }
@@ -587,6 +628,7 @@ Promise.all([
     categories.push({ id: 'uncategorized', name: '未分類（既存の問題）', icon: '📷' });
   }
   renderCategories();
+  renderClearProgress();
   loadUpdates();
   // 共有リンクから直接アクセスした場合も対象の問題を開く
   const initialState = stateFromUrl();

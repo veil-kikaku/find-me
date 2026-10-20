@@ -547,3 +547,41 @@ html {
 @media (max-width: 600px) {
     .updates-panel { padding: 14px; }
 }
+
+/* トップページ：クリア率 */
+.progress-panel {
+  margin-top: 26px;
+  padding: 18px 20px;
+  background: #fff;
+  border: 1px solid #eddcca;
+  border-radius: 16px;
+}
+.progress-panel h2 { margin: 0 0 16px; }
+.progress-item { margin-bottom: 14px; }
+.progress-item:last-child { margin-bottom: 0; }
+.progress-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-bottom: 7px;
+  font-size: 14px;
+}
+.progress-heading span { color: #765b4a; font-variant-numeric: tabular-nums; }
+.progress-overall .progress-heading { font-size: 17px; }
+.progress-track {
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #f4e8d9;
+}
+.progress-overall .progress-track { height: 14px; }
+.progress-fill {
+  height: 100%;
+  background: #e58b55;
+  border-radius: inherit;
+  transition: width .25s ease;
+}
+.progress-groups { border-top: 1px solid #f1e5d6; padding-top: 16px; margin-top: 18px; }
+@media (max-width: 600px) { .progress-panel { padding: 14px; } }
