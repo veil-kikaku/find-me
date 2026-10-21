@@ -217,7 +217,7 @@
   },
   {
     "id": "p006",
-    "title": "岩場でかくれんぼ",
+    "title": "岩場でかくれんぼ1",
     "category": "pokke",
     "difficulty": 2,
     "image": "images/questions/p006.jpg",
@@ -313,13 +313,25 @@
   },
   {
     "id": "p010",
-    "title": "公園でかくれんぼ7",
+    "title": "岩場でかくれんぼ2",
     "category": "pokke",
     "difficulty": 1,
     "image": "images/questions/p010.jpg",
     "answer": {
       "x": 19.748,
       "y": 73.347,
+      "radius": 2
+    }
+  },
+  {
+    "id": "p011",
+    "title": "岩場でかくれんぼ3",
+    "category": "pokke",
+    "difficulty": 1,
+    "image": "images/questions/p011.jpg",
+    "answer": {
+      "x": 69.85,
+      "y": 39.262,
       "radius": 2
     }
   }
