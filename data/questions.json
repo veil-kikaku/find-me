@@ -334,5 +334,17 @@
       "y": 39.262,
       "radius": 2
     }
+  },
+  {
+    "id": "p012",
+    "title": "緑地でかくれんぼ1",
+    "category": "pokke",
+    "difficulty": 1,
+    "image": "images/questions/p012.jpg",
+    "answer": {
+      "x": 73.764,
+      "y": 55.826,
+      "radius": 4
+    }
   }
 ]
