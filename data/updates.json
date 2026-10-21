@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-10-21",
+    "additions": [
+      { "category": "pokke", "count": 5 }
+    ]
+  },
+  {
     "date": "2026-10-20",
     "additions": [
       { "category": "buyoyo", "count": 9 },
