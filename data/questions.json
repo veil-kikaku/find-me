@@ -286,5 +286,17 @@
       "y": 31.457,
       "radius": 2
     }
+  },
+  {
+    "id": "p008",
+    "title": "公園でかくれんぼ4",
+    "category": "pokke",
+    "difficulty": 1,
+    "image": "images/questions/p008.jpg",
+    "answer": {
+      "x": 87.377,
+      "y": 25.475,
+      "radius": 3
+    }
   }
 ]
