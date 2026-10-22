@@ -382,5 +382,17 @@
       "y": 29.815,
       "radius": 2
     }
+  },
+  {
+    "id": "n012",
+    "title": "公園でかくれんぼ9",
+    "category": "naputa",
+    "difficulty": 2,
+    "image": "images/questions/n012.jpg",
+    "answer": {
+      "x": 16.928,
+      "y": 56.976,
+      "radius": 2
+    }
   }
 ]
