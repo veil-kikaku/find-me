@@ -668,3 +668,27 @@ html {
 @media (max-width: 600px) {
     .question-list-filters { justify-content: flex-start; }
 }
+
+/* 問題画面：操作ボタンの右側に提供者名を表示 */
+.play-bottom-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    flex-wrap: wrap;
+}
+.play-action-buttons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.question-user {
+    margin-left: auto;
+    color: #765b4a;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+    text-align: right;
+}
+@media (max-width: 600px) {
+    .question-user { font-size: 12px; }
+}

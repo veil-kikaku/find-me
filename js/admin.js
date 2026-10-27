@@ -202,6 +202,7 @@ $('download').addEventListener('click', async () => {
   const category = currentCategory();
   const id = nextQuestionId(category);
   const title = $('title').value.trim();
+  const user = $('user').value.trim();
   const radius = Number($('radius').value);
   if (!category || !id) return alert('キャラクターを選んでください');
   if (existingQuestions.some(q => q.id === id)) return alert('問題IDが重複しています。再読み込みしてください');
@@ -218,6 +219,7 @@ $('download').addEventListener('click', async () => {
     title,
     category: category.id,
     difficulty: Number($('difficulty').value),
+    ...(user ? { user } : {}),
     image,
     answer: { x: +point.x.toFixed(3), y: +point.y.toFixed(3), radius }
   };
