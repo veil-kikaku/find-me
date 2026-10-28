@@ -418,5 +418,18 @@
       "y": 54.155,
       "radius": 2
     }
+  },
+  {
+    "id": "b011",
+    "title": "緑地で隠れんぼ2",
+    "category": "buyoyo",
+    "difficulty": 3,
+    "user": "てすと",
+    "image": "images/questions/b011.jpg",
+    "answer": {
+      "x": 93.682,
+      "y": 33.286,
+      "radius": 2
+    }
   }
 ]
