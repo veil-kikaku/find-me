@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-10-28",
+    "additions": [
+      { "category": "buyoyo", "count": 2 },
+      { "category": "naputa", "count": 1 }
+    ]
+  },
+  {
     "date": "2026-10-22",
     "additions": [
       { "category": "naputa", "count": 5 }
