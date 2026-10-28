@@ -431,5 +431,18 @@
       "y": 33.286,
       "radius": 2
     }
+  },
+  {
+    "id": "n014",
+    "title": "緑地で隠れんぼ3",
+    "category": "naputa",
+    "difficulty": 3,
+    "user": "てすと",
+    "image": "images/questions/n014.jpg",
+    "answer": {
+      "x": 91.591,
+      "y": 36.771,
+      "radius": 2
+    }
   }
 ]
